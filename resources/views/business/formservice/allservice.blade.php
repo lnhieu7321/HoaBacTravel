@@ -43,8 +43,14 @@
                                         <td>{{ $services->id }}</td>
                                         <td>{{ $services->service_name }}</td>
                                         <td>{{ $services->description }}</td>
-                                        <td></td>
-                                        <td>{{number_format( $services->prices,  2, '.', ','). ' ₫'}}</td>
+                                        <td>
+                                            @if ($services->images->count())
+                                            <img src="{{ URL::to('/assets/upload/'.$services->images->first()->url) }}" alt="{{ $services->service_name }}" width="100px">
+                                            @else
+                                            <span>Không có hình ảnh</span>
+                                            @endif
+                                        </td>
+                                        <td>{{number_format( $services->price,  0, '.', ','). ' ₫'}}</td>
                                         <td>{{ $services->address }}</td>
                                         <td>{{ $services->ward . ', ' . $services->district ?? '' }}
                                         </td>
@@ -56,7 +62,8 @@
                                                     <i class="fas fa-ellipsis-v ellipse_color"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#">
+
+                                                    <a class="dropdown-item" href="{{ route('form/serviceedit', $services->id) }}">
                                                         <i class="fas fa-pencil-alt m-r-5"></i> Sửa
                                                     </a>
                                                     <a class="dropdown-item bookingDelete" href="#" data-toggle="modal" data-target="#delete_asset">

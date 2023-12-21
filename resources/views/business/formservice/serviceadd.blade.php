@@ -37,7 +37,7 @@
                             <div class="form-group">
                                 <label>Giá</label>
                                 <div>
-                                    <input type="text" class="form-control @error('prices') is-invalid @enderror" name="prices" value="{{ old('prices') }}">
+                                    <input type="text" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price') }}">
                                 </div>
                             </div>
                         </div>
@@ -72,13 +72,12 @@
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Quốc gia</label>
-                                <select class="form-control @error('country') is-invalid @enderror" id="sel2" name="country">
-                                    <option selected disabled> --Chọn quốc gia-- </option>
-                                    @foreach ($data as $items )
-                                    <option value="{{ $items->name_country }}">{{ $items->name_country }}</option>
-                                    @endforeach
-                                </select>
+                                <label>Hình ảnh</label>
+                                <div class="d-flex align-items-center">
+                                    <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" value="{{ old('image') }}">
+                                    <img id="preview-image" src="" alt="Hình ảnh" style="width: 50px; height: 50px;">
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -93,6 +92,18 @@
     $(function() {
         $('#datetimepicker3').datetimepicker({
             format: 'LT'
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('input[name="image"]').on('change', function() {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#preview-image').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(this.files[0]);
         });
     });
 </script>

@@ -48,9 +48,19 @@ Route::get('/cancelBooking/{id}', [App\Http\Controllers\BookingController::class
 
 // ----------------------------- service -----------------------------//
 Route::get('/allservice', [App\Http\Controllers\ServiceController::class, 'allservice'])->middleware('auth')->name('form/allservice');
-Route::get('/service/edit/{id}', [App\Http\Controllers\ServiceController::class, 'serviceEdit']);
+Route::get('/serviceedit/{id}', [App\Http\Controllers\ServiceController::class, 'serviceEdit'])->middleware('auth')->name('form/serviceedit');
 Route::get('/serviceadd', [App\Http\Controllers\ServiceController::class, 'serviceAdd'])->middleware('auth')->name('form/serviceadd');
 
 Route::post('/service/save', [App\Http\Controllers\ServiceController::class, 'saveRecord'])->middleware('auth')->name('form/service/save');
 Route::post('/service/update', [App\Http\Controllers\ServiceController::class, 'updateRecord'])->middleware('auth')->name('form/service/update');
 Route::post('/servicedelete', [App\Http\Controllers\ServiceController::class, 'deleteRecord'])->middleware('auth')->name('form/service/delete');
+
+
+
+
+
+
+
+
+
+//==================================================admin===============================================//
